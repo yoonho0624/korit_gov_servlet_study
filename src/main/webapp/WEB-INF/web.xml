@@ -19,4 +19,20 @@
         <servlet-name>config-servlet</servlet-name>
         <url-pattern>/ch01/config/age</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>logging-filter</filter-name>
+        <filter-class>com.korit.korit_gov_servlet_study.ch05.LoggingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>logging-filter</filter-name>
+        <url-pattern>/ch05/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>auth-filter</filter-name>
+        <filter-class>com.korit.korit_gov_servlet_study.ch05.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>auth-filter</filter-name>
+        <url-pattern>/ch05/mypage/*</url-pattern>
+    </filter-mapping>
 </web-app>
