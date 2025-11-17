@@ -37,7 +37,6 @@ public class BoardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        Board board = gson.fromJson(req.getReader(), Board.class);
         String json = gson.toJson(boardRepository.allBoard());
         resp.setStatus(200);
         resp.getWriter().write(json);

@@ -20,7 +20,7 @@ public class UserRepository {
         users.add(user);
         return user;
     }
-    public List<User> allUser(User user) {
+    public List<User> allUser() {
         return users;
     }
     public User findByUsername(String username) {
