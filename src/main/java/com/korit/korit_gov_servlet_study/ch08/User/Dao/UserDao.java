@@ -4,6 +4,8 @@ import com.korit.korit_gov_servlet_study.ch08.User.Entity.User;
 import com.korit.korit_gov_servlet_study.ch08.User.Util.ConnectionFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserDao {
@@ -75,6 +77,39 @@ public class UserDao {
             try(ResultSet rs = ps.executeQuery()) {
                 return rs.next() ? Optional.of(toUser(rs)) : Optional.empty();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+    public Optional<List<User>> findByKeyword(String keyword) {
+        String sql = "select user_id, username, password, age, create_dt from user_tb where username like ?";
+        List<User> userList = new ArrayList<>();
+        try(Connection con = ConnectionFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "%" + keyword + "%");
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    userList.add(toUser(rs));
+                }
+            }
+            return Optional.of(userList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+    public Optional<List<User>> getUserAll() {
+        String sql = "select user_id, username, password, age, create_dt from user_tb";
+        List<User> userList = new ArrayList<>();
+        try(Connection con = ConnectionFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)) {
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    userList.add(toUser(rs));
+                }
+            }
+            return Optional.of(userList);
         } catch (SQLException e) {
             e.printStackTrace();
             return Optional.empty();

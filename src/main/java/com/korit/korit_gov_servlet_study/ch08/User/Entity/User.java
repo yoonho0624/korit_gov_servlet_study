@@ -1,11 +1,10 @@
 package com.korit.korit_gov_servlet_study.ch08.User.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,5 +16,6 @@ public class User {
     private String username;
     private String password;
     private int age;
+    @JsonFormat(pattern = "YYYY-mm-dd kk:mm:ss")
     private LocalDateTime createDt;
 }

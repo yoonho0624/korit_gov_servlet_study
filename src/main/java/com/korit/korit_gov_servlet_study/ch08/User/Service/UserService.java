@@ -4,6 +4,7 @@ import com.korit.korit_gov_servlet_study.ch08.User.Dao.UserDao;
 import com.korit.korit_gov_servlet_study.ch08.User.Dto.SignupReqDto;
 import com.korit.korit_gov_servlet_study.ch08.User.Entity.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
@@ -25,5 +26,14 @@ public class UserService {
     public User addUser(SignupReqDto signupReqDto) {
         // 여기서는 딱히 비즈니스 로직이 필요가 없다. 그냥 추가하면 된다.
         return userDao.addUser(signupReqDto.toEntity());
+    }
+    public Optional<User> findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+    public Optional<List<User>> findByKeyword(String keyword) {
+        return userDao.findByKeyword(keyword);
+    }
+    public Optional<List<User>> getUserAll() {
+        return userDao.getUserAll();
     }
 }
